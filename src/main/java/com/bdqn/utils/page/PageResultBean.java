@@ -45,8 +45,8 @@ public class PageResultBean<T> implements Serializable {
     public PageResultBean() {
     }
 
-    public PageResultBean(List<T> rows) {
-        init(rows);
+    public PageResultBean(Page page,List<T> rows) {
+        init(page,rows);
     }
 
     public Long getTotal() {
@@ -89,14 +89,11 @@ public class PageResultBean<T> implements Serializable {
         this.pages = pages;
     }
 
-    private void init(List<T> rows) {
-        if (rows instanceof Page) {
-            Page<T> page = (Page<T>) rows;
+    private void init(Page page,List<T> rows) {
             this.total = page.getTotal();
-            this.rows = page.getResult();
+            this.rows = rows;
             this.pageNum = page.getPageNum();
             this.pageSize = page.getPageSize();
             this.pages = page.getPages();
-        }
     }
 }

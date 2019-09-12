@@ -91,9 +91,9 @@ public class UserController {
         if (pageNum == null) {
             pageNum = "1";
         }
-        PageHelper.startPage(Integer.valueOf(pageNum), 5, "`u`.creationDate desc");
+        Page<User> page=PageHelper.startPage(Integer.valueOf(pageNum), 5, "`u`.creationDate desc");
 //        PageResultBean<User> userPageResultBean = new PageResultBean<>(userService.findUsers());
-        PageResultBean<User> userPageResultBean = new PageResultBean<>(userService.findUsersByRoleAndName(queryUserRole, queryname));
+        PageResultBean<User> userPageResultBean = new PageResultBean<>(page,userService.findUsersByRoleAndName(queryUserRole, queryname));
         List<Role> roleList = roleService.findRoles();
         List<User> userList = userPageResultBean.getRows();
         model.addAttribute("userList", userList);//分页实体信息
